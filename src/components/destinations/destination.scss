@@ -1,0 +1,82 @@
+$base-color:#BB198F;
+$border-color :#666666;
+.typeTrip {
+    display: flex;
+    background: #fff;
+    border: $border-color solid 1px;
+    border-radius: 5px;
+    width: 30%;
+    height: 10%;
+    padding: 0;
+    font-size: .9rem;
+    font-weight: 600;
+    margin: 0 10px;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px;
+    & p {
+        display: flex;
+        color: $border-color;
+        justify-content: center;
+        align-items: center;
+        margin: 5px;
+        width: 45%;
+        height: 70%;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    & .selected {
+        background: $base-color;
+        color: #fff;
+    }
+}
+
+.citySections {
+    width: 70%;
+    height: 30%;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+    & .destination,
+    .origin {
+        background: #fff;
+        width: 50%;
+        height: 90%;
+        margin: 0px 10px;
+        border-radius: 5px;
+        border: $border-color 2px solid;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        & p {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000;
+        }
+        &:hover {
+            border: $base-color 2px solid;
+        }
+    }
+}
+
+.calendarSections {
+    width: 70%;
+    height: 10%;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    & input[type="date"] {
+        width: 40%;
+        height: 10%;
+        border: $border-color 2px solid;
+        border-radius: 5px;
+        background: #fff;
+        font-size: 1.2rem;
+        color: #000;
+        padding: 10px;
+        cursor: pointer;
+    }
+}
