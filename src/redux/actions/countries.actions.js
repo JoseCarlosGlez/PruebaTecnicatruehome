@@ -1,9 +1,44 @@
 import axios from 'axios'
-import { GET_ALL_COUNTRIES } from '../../types/'
+import {
+    DOWNLOAD_ALL_COUNTRIES,
+    DOWNLOAD_ALL_COUNTRIES_SUCCESFULL,
+    DOWNLOAD_ALL_COUNTRIES_ERROR,
+    ADD_NEW_TRIP,
+    ADD_NEW_TRIP_ERROR,
+    ADD_NEW_TRIP_SUCCESFULL
+} from './../types'
 
-export function getAllCountries() {
-    return async() => {
-        let x = await axios.get('http://localhost:3004/cities')
-        console.log(x)
+/**
+ * Download all products 
+ * @returns 
+ */
+export function getAllCountriesAction() {
+    return async(dispatch) => {
+        dispatch(downloadCountries())
+        try {
+            const response = (await axios.get('http://localhost:3004/cities')).data
+            dispatch(downloadCountriesSuccesful(response))
+        } catch (e) {
+            dispatch(downloadCountriesError('hubo un error al descargar la data'))
+        }
     }
 }
+
+
+
+
+
+const downloadCountries = () => ({
+    type: DOWNLOAD_ALL_COUNTRIES,
+    payload: true
+})
+
+const downloadCountriesSuccesful = countries => ({
+    type: DOWNLOAD_ALL_COUNTRIES_SUCCESFULL,
+    payload: countries
+})
+const downloadCountriesError = (message) => ({
+    type: DOWNLOAD_ALL_COUNTRIES_ERROR,
+    payload: true,
+
+})
