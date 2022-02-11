@@ -145,13 +145,13 @@ const DestinationsComponent = () => {
         <div>
             <div className="title">
                 <h1>Reservacion de vuelos</h1>
-                <Link to="shoppingcart">Shopping Cart</Link>
+                <Link className='shoppingCart' to="shoppingcart">Ir a carrito de compras </Link>
             </div>
             <div className='typeTrip'>
-                <p onClick={() =>{ 
-                    
+                <p onClick={() => {
+
                     setTypeTrip(false)
-                
+
                 }} className={!typeTrip ? 'selected' : ''}  >Viaje redondo</p>
                 <p onClick={() => {
                     setTypeTrip(true)

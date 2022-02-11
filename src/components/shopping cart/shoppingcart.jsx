@@ -28,7 +28,7 @@ const ShoppingCart = (props) => {
         <>
             <div className='container-cart'>
                 <Link to="/">Regresar a comprar</Link>
-                <h1>Shopping Cart</h1>
+                <h1>Carrito de compras</h1>
                 <div className='tableWrap'>
 
                     <table>
@@ -63,7 +63,7 @@ const ShoppingCart = (props) => {
                                 )
                             }
                             {
-                                tickets.length > 0 ? < tr >
+                                tickets.length > 0 ? < tr className='lastRowTotal' >
                                     <td colSpan={8} >Total: $ {tickets.reduce((total, currentValue) => total + Number(currentValue.price), 0)}</td>
                                 </tr> : null
                             }

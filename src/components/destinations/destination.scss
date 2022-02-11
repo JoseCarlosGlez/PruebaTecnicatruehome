@@ -10,6 +10,17 @@ $border-color :#9e9a9a;
     }
 }
 
+.shoppingCart {
+    color: #000;
+    position: absolute;
+    right: 40%;
+    font-weight: 700;
+    text-decoration: none;
+    &:hover {
+        color: $base-color;
+    }
+}
+
 .typeTrip {
     display: flex;
     background: #fff;
