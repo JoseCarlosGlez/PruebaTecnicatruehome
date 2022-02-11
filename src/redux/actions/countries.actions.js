@@ -3,9 +3,6 @@ import {
     DOWNLOAD_ALL_COUNTRIES,
     DOWNLOAD_ALL_COUNTRIES_SUCCESFULL,
     DOWNLOAD_ALL_COUNTRIES_ERROR,
-    ADD_NEW_TRIP,
-    ADD_NEW_TRIP_ERROR,
-    ADD_NEW_TRIP_SUCCESFULL
 } from './../types'
 
 import { URL } from './../../enums/MagicWords.enum'
