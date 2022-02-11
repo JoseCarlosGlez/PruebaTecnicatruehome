@@ -8,6 +8,7 @@ import {
     ADD_NEW_TRIP_SUCCESFULL
 } from './../types'
 
+import { URL } from './../../enums/MagicWords.enum'
 /**
  * Download all products 
  * @returns 
@@ -16,7 +17,7 @@ export function getAllCountriesAction() {
     return async(dispatch) => {
         dispatch(downloadCountries())
         try {
-            const response = (await axios.get('http://localhost:3004/cities')).data
+            const response = (await axios.get(URL)).data
             dispatch(downloadCountriesSuccesful(response))
         } catch (e) {
             dispatch(downloadCountriesError('hubo un error al descargar la data'))

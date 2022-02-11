@@ -1,10 +1,12 @@
 import './registerData.scss'
-import { ErrorMessage, Field, form, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup'
 import axios from 'axios';
 import { TRIPS } from "./../../enums/MagicWords.enum";
 import * as SWAL from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
+import { URL } from './../../enums/MagicWords.enum'
+
 const registerForm = () => {
 
 
@@ -40,7 +42,7 @@ const registerForm = () => {
             let trips = JSON.parse(localStorage.getItem(TRIPS))
             let dataSaveDB = { ...values, trips }
             try {
-                await axios.post('http://localhost:3004/trips', dataSaveDB)
+                await axios.post(URL, dataSaveDB)
 
                 localStorage.removeItem(TRIPS)
                 resetForm()
