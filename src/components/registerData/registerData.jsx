@@ -42,7 +42,7 @@ const registerForm = () => {
             let trips = JSON.parse(localStorage.getItem(TRIPS))
             let dataSaveDB = { ...values, trips }
             try {
-                await axios.post(URL, dataSaveDB)
+                await axios.post(`${URL}/trips`, dataSaveDB)
 
                 localStorage.removeItem(TRIPS)
                 resetForm()

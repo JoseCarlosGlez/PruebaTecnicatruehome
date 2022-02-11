@@ -17,7 +17,7 @@ export function getAllCountriesAction() {
     return async(dispatch) => {
         dispatch(downloadCountries())
         try {
-            const response = (await axios.get(URL)).data
+            const response = (await axios.get(`${URL}/cities`)).data
             dispatch(downloadCountriesSuccesful(response))
         } catch (e) {
             dispatch(downloadCountriesError('hubo un error al descargar la data'))
