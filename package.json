@@ -27,9 +27,9 @@
         "yup": "^0.32.11"
     },
     "scripts": {
-        "start:project": "react-scripts start  server ",
-        "serve": " node server.js",
-        "start": " npm i && concurrently   \"npm run start:project\" \"npm run serve\"",
+        "start:project": "react-scripts start ",
+        "start": " node server.js",
+        "start:old": " npm i && concurrently   \"npm run start:project\" \"npm run serve\"",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
