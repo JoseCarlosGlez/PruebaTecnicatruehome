@@ -24,9 +24,9 @@
         "yup": "^0.32.11"
     },
     "scripts": {
-        "start": "react-scripts start  server ",
+        "start:project": "react-scripts start  server ",
         "serve": " json-server --watch db.json --port 3004",
-        "deploy": "npm i && concurrently   \"npm run start\" \"npm run serve\"",
+        "start": " concurrently   \"npm run start:project\" \"npm run serve\"",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
