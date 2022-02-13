@@ -24,19 +24,19 @@ const registerForm = () => {
             firstName: Yup.string()
                 .typeError('Ingrese solo letras')
                 .min(4, 'Favor de ingresar mas de 4 caracteres')
-                .required('Este campo es requeriod'),
+                .required('Este campo es requerido'),
             lastName: Yup.string()
                 .typeError('Ingrese solo letras')
                 .min(4, 'Favor de ingresar mas de 4 caracteres')
-                .required('Este campo es requeriod'),
+                .required('Este campo es requerido'),
             address: Yup.string()
                 .typeError('Ingrese solo letras')
                 .min(4, 'Favor de ingresar mas de 4 caracteres')
-                .required('Este campo es requeriod'),
+                .required('Este campo es requerido'),
             email: Yup.string()
                 .typeError('Email invalido')
                 .email('Email invalido')
-                .required('Este campo es requeriod')
+                .required('Este campo es requerido')
         }),
         onSubmit: async (values, { resetForm }) => {
             let trips = JSON.parse(localStorage.getItem(TRIPS))

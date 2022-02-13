@@ -48,9 +48,8 @@ const DestinationsComponent = () => {
     const [destiny, setdestiny] = useState(null);
     const [typeTrip, setTypeTrip] = useState(false);
     const [numberPassenger, setNumberPassenger] = useState(null);
-    const [departureDate, setDepartureDate] = useState(null);
-    const [arrivedDate, setArrivedDate] = useState(null);
-    const passengerComponentsRef = useRef();
+    const [departureDate, setDepartureDate] = useState('');
+    const [arrivedDate, setArrivedDate] = useState('');
     const dispatch = useDispatch();
 
 
@@ -74,6 +73,7 @@ const DestinationsComponent = () => {
 
 
     const recolectData = () => {
+        console.log(numberPassenger)
         let newTrip = {
             destiny,
             origin,
@@ -106,7 +106,6 @@ const DestinationsComponent = () => {
             return
         }
 
-        passengerComponentsRef.current.restartValues()
         let trips = localStorage.getItem(TRIPS) !== null ? JSON.parse(localStorage.getItem(TRIPS)) : []
         console.log({ ...newTrip, id: Math.random() })
         trips.push({ ...newTrip, id: Math.random })
@@ -126,7 +125,6 @@ const DestinationsComponent = () => {
     const setPasenger = useCallback(
         (value) => {
             setNumberPassenger(value)
-            console.log(numberPassenger)
         })
 
 
@@ -183,12 +181,12 @@ const DestinationsComponent = () => {
                 <div>
 
                     <label htmlFor="">Fecha de llegada</label>
-                    <input onChange={e => setArrivedDate(e.target.value)} type="datetime-local" value={arrivedDate} disabled={typeTrip || departureDate == null} min={departureDate !== null ? departureDate : new Date().toISOString().slice(0, -8)} />
+                    <input onChange={e => setArrivedDate(e.target.value)} type="datetime-local" value={arrivedDate} disabled={typeTrip || departureDate === ''} min={departureDate !== '' ? departureDate : new Date().toISOString().slice(0, -8)} />
                 </div>
             </div >
 
             <div className='selectSections'>
-                <SelectNumberPeople GetNumberPassenger={setPasenger} ref={passengerComponentsRef} />
+                <SelectNumberPeople GetNumberPassenger={setPasenger} />
                 <button onClick={recolectData}>Guardar vuelo</button>
 
             </div>

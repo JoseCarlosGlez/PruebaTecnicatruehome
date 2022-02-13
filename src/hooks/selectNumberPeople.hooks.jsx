@@ -1,29 +1,16 @@
 /* eslint-disable no-unreachable */
-import React, { forwardRef, useImperativeHandle } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import './selectNumberPeople.scss'
 import classnames from 'classnames'
 let numberAdultTemp = 0
 let numberChildrenTemp = 0
-const SelectNumberPeople = forwardRef(({GetNumberPassenger}, ref) => {
+const SelectNumberPeople = ({ GetNumberPassenger }, ref) => {
 
 
     const [isActive, setIsActive] = useState(false)
     const [numberAdult, setNumberAdult] = useState(0)
     const [numberChildren, setNumberChildren] = useState(0)
-
-    useImperativeHandle(
-        ref,
-        () => ({
-            restartValues() {
-                numberAdultTemp = 0
-                numberChildrenTemp = 0
-                setNumberAdult(0)
-                setNumberChildren(0)
-            }
-        }),
-
-    )
 
 
 
@@ -116,5 +103,5 @@ const SelectNumberPeople = forwardRef(({GetNumberPassenger}, ref) => {
 
     )
 }
-)
+
 export default SelectNumberPeople;
