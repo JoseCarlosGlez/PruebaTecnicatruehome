@@ -29,6 +29,7 @@
     "scripts": {
         "start:project": "react-scripts start ",
         "start": " node server.js",
+        "serve": " json-server --watch db.json --port 3004",
         "start:local": " npm i && concurrently   \"npm run start:project\" \"npm run serve\"",
         "build": "react-scripts build",
         "test": "react-scripts test",
