@@ -70,8 +70,6 @@ const DestinationsComponent = () => {
 
         setIsOpen(false)
         return
-
-
     }
 
 
@@ -108,24 +106,17 @@ const DestinationsComponent = () => {
             return
         }
 
-
         passengerComponentsRef.current.restartValues()
-
-
         let trips = localStorage.getItem(TRIPS) !== null ? JSON.parse(localStorage.getItem(TRIPS)) : []
         console.log({ ...newTrip, id: Math.random() })
         trips.push({ ...newTrip, id: Math.random })
         localStorage.setItem(TRIPS, JSON.stringify(trips))
         toast('success', 'Viaje almacenado correctamente')
-
     }
-
-
 
     const closeModal = () => {
         setIsOpen(false);
     }
-
 
     useEffect(() => {
         const uploadCities = () => dispatch(getAllCountriesAction())
