@@ -23,7 +23,6 @@ const SelectNumberPeople = forwardRef(({ GetNumberPassenger }, ref) => {
 
 
     return (
-
         <>
             <div className="dropdown-container" >
                 <div className="dropdown-input" onClick={() => setIsActive(!isActive)}>

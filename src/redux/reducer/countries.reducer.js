@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 
-import { GET_ALL_COUNTRIES, DOWNLOAD_ALL_COUNTRIES, DOWNLOAD_ALL_COUNTRIES_ERROR, DOWNLOAD_ALL_COUNTRIES_SUCCESFULL, ADD_NEW_TRIP, ADD_NEW_TRIP_ERROR, ADD_NEW_TRIP_SUCCESFULL } from './types'
+import { DOWNLOAD_ALL_COUNTRIES, DOWNLOAD_ALL_COUNTRIES_ERROR, DOWNLOAD_ALL_COUNTRIES_SUCCESFULL } from './../types'
 
 const initialState = {
     countries: [],

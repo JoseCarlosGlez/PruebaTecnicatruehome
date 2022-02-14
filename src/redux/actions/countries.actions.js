@@ -22,10 +22,6 @@ export function getAllCountriesAction() {
     }
 }
 
-
-
-
-
 const downloadCountries = () => ({
     type: DOWNLOAD_ALL_COUNTRIES,
     payload: true

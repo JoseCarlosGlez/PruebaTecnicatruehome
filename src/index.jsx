@@ -5,7 +5,7 @@ import DestinationsComponent from './components/destinations/destination';
 import ShoppingCart from './components/shopping cart/shoppingcart';
 //redux
 import { Provider } from 'react-redux';
-import store from './store.js'
+import store from './redux/store'
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

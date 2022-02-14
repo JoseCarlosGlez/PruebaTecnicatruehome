@@ -4,6 +4,8 @@ import RegisterForm from '../registerData/registerData';
 import { Link } from 'react-router-dom';
 import { TRIPS } from '../../enums/MagicWords.enum';
 import Modal from 'react-modal';
+import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+
 Modal.setAppElement(document.getElementById('root'));
 const customStyles = {
     content: {
@@ -13,7 +15,7 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         width: '40%',
-        height: '40%',
+        height: 'auto',
         padding: '2px',
         transform: 'translate(-50%, -50%)',
     },
@@ -42,7 +44,7 @@ const ShoppingCart = (props) => {
     return (
         <>
             <div className='container-cart'>
-                <Link to="/">Regresar a comprar</Link>
+                <Link to="/" className='returnLink'> <BsFillArrowLeftSquareFill />  Regresar a comprar</Link>
                 <h1>Carrito de compras</h1>
                 <div className='tableWrap'>
 
@@ -70,9 +72,9 @@ const ShoppingCart = (props) => {
                                         <td>{new Date(value.departureDate).toLocaleDateString()} - {new Date(value.departureDate).toLocaleTimeString()} </td>
                                         <td>{value.arrivedDate !== null ? ` ${new Date(value.arrivedDate).toLocaleDateString()} - ${new Date(value.arrivedDate).toLocaleTimeString()}` : '- - -'}</td>
                                         <td>{`Adultos: ${value.numberPassenger.numberAdult}, Niños: ${value.numberPassenger.numberChildren} `}</td>
-                                        <td>{value.price}</td>
+                                        <td>$ {value.price}</td>
                                         <td>
-                                            <button onClick={e => deleteTripBook(index)}>Eliminar</button>
+                                            <button className='deleteTrip' onClick={e => deleteTripBook(index)}>Eliminar</button>
                                         </td>
                                     </tr>
                                 )
@@ -99,28 +101,19 @@ const ShoppingCart = (props) => {
                             Registrar datos
                         </button> :
                         null
-
-
                 }
-
             </div >
 
             {tickets.length > 0 ?
-
                 (<Modal
                     isOpen={modalIsOpen}
                     style={customStyles}
                     onRequestClose={e => setIsOpen(false)}
-
                 >
                     <RegisterForm />
                 </Modal>
                 ) : null}
-
         </>
     )
-
 }
-
-
 export default ShoppingCart;

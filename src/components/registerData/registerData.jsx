@@ -9,7 +9,6 @@ import { URL } from './../../enums/MagicWords.enum'
 
 const registerForm = () => {
 
-
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const Navigate = useNavigate()
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -46,8 +45,6 @@ const registerForm = () => {
 
                 localStorage.removeItem(TRIPS)
                 resetForm()
-
-
                 SWAL.fire({
                     icon: 'success',
                     title: 'Viajes reservados',
@@ -123,9 +120,7 @@ const registerForm = () => {
                         ) : null}
 
                     </div>
-
                 </div>
-
                 <button type='submit' className='buytickets'>
                     Comprar boletos
                 </button>
