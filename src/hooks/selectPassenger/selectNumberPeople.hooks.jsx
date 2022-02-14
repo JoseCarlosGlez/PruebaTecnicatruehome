@@ -3,33 +3,26 @@ import React, { forwardRef, useImperativeHandle } from 'react'
 import { useState } from 'react'
 import './selectNumberPeople.scss'
 import classnames from 'classnames'
-let numberAdultTemp = 0
-let numberChildrenTemp = 0
-const SelectNumberPeople = forwardRef(({GetNumberPassenger}, ref) => {
+const SelectNumberPeople = forwardRef(({ GetNumberPassenger }, ref) => {
 
 
     const [isActive, setIsActive] = useState(false)
     const [numberAdult, setNumberAdult] = useState(0)
     const [numberChildren, setNumberChildren] = useState(0)
 
+
     useImperativeHandle(
         ref,
         () => ({
-            restartValues() {
-                numberAdultTemp = 0
-                numberChildrenTemp = 0
+            resetValues() {
                 setNumberAdult(0)
                 setNumberChildren(0)
             }
         }),
-
     )
 
 
-
-
     return (
-
         <>
             <div className="dropdown-container" >
                 <div className="dropdown-input" onClick={() => setIsActive(!isActive)}>
@@ -58,9 +51,9 @@ const SelectNumberPeople = forwardRef(({GetNumberPassenger}, ref) => {
                         </p>
                         <span onClick={e => {
                             if (numberAdult > 0) {
-                                numberAdultTemp--
-                                setNumberAdult(numberAdultTemp)
-                                GetNumberPassenger({ numberAdultTemp, numberChildrenTemp })
+                                let value = numberAdult - 1
+                                setNumberAdult(value)
+                                GetNumberPassenger({ numberAdult: value, numberChildren })
 
                             }
 
@@ -74,9 +67,9 @@ const SelectNumberPeople = forwardRef(({GetNumberPassenger}, ref) => {
                         </span>
 
                         <span onClick={e => {
-                            numberAdultTemp++
-                            setNumberAdult(numberAdultTemp)
-                            GetNumberPassenger({ numberAdultTemp, numberChildrenTemp })
+                            let value = numberAdult + 1
+                            setNumberAdult(value)
+                            GetNumberPassenger({ numberAdult: value, numberChildren })
 
                         }}>
                             +
@@ -90,9 +83,9 @@ const SelectNumberPeople = forwardRef(({GetNumberPassenger}, ref) => {
                         </p>
                         <span onClick={e => {
                             if (numberAdult > 0) {
-                                numberChildrenTemp--
-                                setNumberChildren(numberChildrenTemp)
-                                GetNumberPassenger({ numberAdultTemp, numberChildrenTemp })
+                                let value = numberChildren - 1
+                                setNumberChildren(value)
+                                GetNumberPassenger({ numberAdult, numberChildren: value })
                             }
                         }}>
                             -
@@ -101,9 +94,9 @@ const SelectNumberPeople = forwardRef(({GetNumberPassenger}, ref) => {
                             {numberChildren}
                         </span>
                         <span onClick={e => {
-                            numberChildrenTemp++
-                            setNumberChildren(numberChildrenTemp)
-                            GetNumberPassenger({ numberAdultTemp, numberChildrenTemp })
+                            let value = numberChildren + 1
+                            setNumberChildren(value)
+                            GetNumberPassenger({ numberAdult, numberChildren: value })
 
                         }}>
                             +
@@ -115,6 +108,6 @@ const SelectNumberPeople = forwardRef(({GetNumberPassenger}, ref) => {
         </>
 
     )
-}
-)
+})
+
 export default SelectNumberPeople;

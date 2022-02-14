@@ -22,13 +22,12 @@ $border-color :#666666;
 }
 
 .bg-cover {
-    border: 2px solid rgb(180, 175, 175);
-    border-radius: 5px;
-    width: 100%;
-    height: 50%;
+    width: 95%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: auto;
 }
 
 .buytickets {

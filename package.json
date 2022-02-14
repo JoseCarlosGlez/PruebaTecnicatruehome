@@ -15,6 +15,7 @@
         "react-date-picker": "^8.4.0",
         "react-day-picker": "^7.4.10",
         "react-dom": "^17.0.2",
+        "react-icons": "^4.3.1",
         "react-modal": "^3.14.4",
         "react-redux": "^7.2.6",
         "react-router-dom": "^6.2.1",
@@ -29,7 +30,8 @@
     "scripts": {
         "start:project": "react-scripts start ",
         "start": " node server.js",
-        "start:local": " npm i && concurrently   \"npm run start:project\" \"npm run serve\"",
+        "serve": " json-server --watch db.json --port 3004",
+        "start:local": " concurrently   \"npm run start:project\" \"npm run serve\"",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"

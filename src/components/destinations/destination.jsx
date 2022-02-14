@@ -1,19 +1,20 @@
 import './destination.scss';
 import { useEffect, useRef, useState, useCallback } from 'react';
 
-import SelectNumberPeople from './../../hooks/selectNumberPeople.hooks';
-
-import { useDispatch, useSelector } from 'react-redux';
+import SelectNumberPeople from './../../hooks/selectPassenger/selectNumberPeople.hooks';
 
 //actions de redux
+import { useDispatch, useSelector } from 'react-redux';
 import { getAllCountriesAction } from './../../redux/actions/countries.actions';
+
 
 import { Link } from 'react-router-dom';
 
-import Modal from 'react-modal';
 
+import Modal from 'react-modal';
 import * as SWAL from 'sweetalert2'
 import { TRIPS } from '../../enums/MagicWords.enum';
+import { BsFillCartFill } from "react-icons/bs";
 
 const customStyles = {
     content: {
@@ -24,7 +25,7 @@ const customStyles = {
         marginRight: '-50%',
         width: '30%',
         height: '30%',
-        padding: '2px',
+        padding: '5px',
         transform: 'translate(-50%, -50%)',
     },
 };
@@ -37,7 +38,6 @@ let toast = (icon, title, text) => {
     })
 }
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement(document.getElementById('root'));
 
 const DestinationsComponent = () => {
@@ -46,11 +46,11 @@ const DestinationsComponent = () => {
     const [OriginOrDestiny, setIsOriginOrDestiny] = useState(false);
     const [origin, setOrigin] = useState(null);
     const [destiny, setdestiny] = useState(null);
+    const [departureDate, setDepartureDate] = useState('');
+    const [arrivedDate, setArrivedDate] = useState('');
     const [typeTrip, setTypeTrip] = useState(false);
     const [numberPassenger, setNumberPassenger] = useState(null);
-    const [departureDate, setDepartureDate] = useState(null);
-    const [arrivedDate, setArrivedDate] = useState(null);
-    const passengerComponentsRef = useRef();
+    const componentPassengerRef = useRef()
     const dispatch = useDispatch();
 
 
@@ -74,6 +74,7 @@ const DestinationsComponent = () => {
 
 
     const recolectData = () => {
+
         let newTrip = {
             destiny,
             origin,
@@ -101,12 +102,17 @@ const DestinationsComponent = () => {
             newTrip.arrivedDate = null
         }
 
-        if (numberPassenger === null || (numberPassenger.numberAdultTemp === 0 && numberPassenger.numberChildrenTemp === 0)) {
+        if (numberPassenger === null || (numberPassenger.numberAdult === 0 && numberPassenger.numberChildren === 0)) {
             toast('error', 'Error', 'Favor de seleccionar numero de pasajeros')
             return
         }
 
-        passengerComponentsRef.current.restartValues()
+        setOrigin(null)
+        setdestiny(null)
+        setDepartureDate('')
+        setArrivedDate('')
+
+        componentPassengerRef.current.resetValues()
         let trips = localStorage.getItem(TRIPS) !== null ? JSON.parse(localStorage.getItem(TRIPS)) : []
         console.log({ ...newTrip, id: Math.random() })
         trips.push({ ...newTrip, id: Math.random })
@@ -114,9 +120,6 @@ const DestinationsComponent = () => {
         toast('success', 'Viaje almacenado correctamente')
     }
 
-    const closeModal = () => {
-        setIsOpen(false);
-    }
 
     useEffect(() => {
         const uploadCities = () => dispatch(getAllCountriesAction())
@@ -126,9 +129,7 @@ const DestinationsComponent = () => {
     const setPasenger = useCallback(
         (value) => {
             setNumberPassenger(value)
-            console.log(numberPassenger)
         })
-
 
     const cities = useSelector(state => state.countriesReducer.countries)
 
@@ -136,7 +137,7 @@ const DestinationsComponent = () => {
         <div>
             <div className="title">
                 <h1>Reservacion de vuelos</h1>
-                <Link className='shoppingCart' to="shoppingcart">Ir a carrito de compras </Link>
+                <Link className='shoppingCart' to="shoppingcart"><BsFillCartFill />  compras </Link>
             </div>
             <div className='typeTrip'>
                 <p onClick={() => {
@@ -165,9 +166,8 @@ const DestinationsComponent = () => {
 
             <Modal
                 isOpen={modalIsOpen}
-                onRequestClose={closeModal}
+                onRequestClose={e => setIsOpen(false)}
                 style={customStyles}
-                contentLabel="Example Modal"
             >
                 <ul className='citiesList'>
                     {
@@ -183,19 +183,16 @@ const DestinationsComponent = () => {
                 <div>
 
                     <label htmlFor="">Fecha de llegada</label>
-                    <input onChange={e => setArrivedDate(e.target.value)} type="datetime-local" value={arrivedDate} disabled={typeTrip || departureDate == null} min={departureDate !== null ? departureDate : new Date().toISOString().slice(0, -8)} />
+                    <input onChange={e => setArrivedDate(e.target.value)} type="datetime-local" value={arrivedDate} disabled={typeTrip || departureDate === ''} min={departureDate !== '' ? departureDate : new Date().toISOString().slice(0, -8)} />
                 </div>
             </div >
 
             <div className='selectSections'>
-                <SelectNumberPeople GetNumberPassenger={setPasenger} ref={passengerComponentsRef} />
+                <SelectNumberPeople GetNumberPassenger={setPasenger} ref={componentPassengerRef} />
                 <button onClick={recolectData}>Guardar vuelo</button>
 
             </div>
-
         </div>
-
-
     )
 }
 
