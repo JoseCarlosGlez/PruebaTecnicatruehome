@@ -50,6 +50,7 @@ const DestinationsComponent = () => {
     const [numberPassenger, setNumberPassenger] = useState(null);
     const [departureDate, setDepartureDate] = useState('');
     const [arrivedDate, setArrivedDate] = useState('');
+    const componentPassengerRef = useRef()
     const dispatch = useDispatch();
 
 
@@ -74,6 +75,7 @@ const DestinationsComponent = () => {
 
     const recolectData = () => {
         console.log(numberPassenger)
+        componentPassengerRef.current.resetValues()
         let newTrip = {
             destiny,
             origin,
@@ -101,7 +103,7 @@ const DestinationsComponent = () => {
             newTrip.arrivedDate = null
         }
 
-        if (numberPassenger === null || (numberPassenger.numberAdultTemp === 0 && numberPassenger.numberChildrenTemp === 0)) {
+        if (numberPassenger === null || (numberPassenger.numberAdult === 0 && numberPassenger.numberChildren === 0)) {
             toast('error', 'Error', 'Favor de seleccionar numero de pasajeros')
             return
         }
@@ -165,7 +167,6 @@ const DestinationsComponent = () => {
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 style={customStyles}
-                contentLabel="Example Modal"
             >
                 <ul className='citiesList'>
                     {
@@ -186,7 +187,7 @@ const DestinationsComponent = () => {
             </div >
 
             <div className='selectSections'>
-                <SelectNumberPeople GetNumberPassenger={setPasenger} />
+                <SelectNumberPeople GetNumberPassenger={setPasenger} ref={componentPassengerRef} />
                 <button onClick={recolectData}>Guardar vuelo</button>
 
             </div>

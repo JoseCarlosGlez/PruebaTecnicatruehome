@@ -3,10 +3,25 @@ import './shoppingcart.scss'
 import RegisterForm from '../registerData/registerData';
 import { Link } from 'react-router-dom';
 import { TRIPS } from '../../enums/MagicWords.enum';
+import Modal from 'react-modal';
+Modal.setAppElement(document.getElementById('root'));
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        width: '40%',
+        height: '40%',
+        padding: '2px',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
 const ShoppingCart = (props) => {
     const [tickets, setTickets] = useState([])
-    const [payment, setpayment] = useState(false)
+    const [modalIsOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         if (localStorage.getItem(TRIPS) == null) return
@@ -54,7 +69,7 @@ const ShoppingCart = (props) => {
                                         <td>{value.destiny}</td>
                                         <td>{new Date(value.departureDate).toLocaleDateString()} - {new Date(value.departureDate).toLocaleTimeString()} </td>
                                         <td>{value.arrivedDate !== null ? ` ${new Date(value.arrivedDate).toLocaleDateString()} - ${new Date(value.arrivedDate).toLocaleTimeString()}` : '- - -'}</td>
-                                        <td>{`Adultos: ${value.numberPassenger.numberAdultTemp}, Niños: ${value.numberPassenger.numberChildrenTemp} `}</td>
+                                        <td>{`Adultos: ${value.numberPassenger.numberAdult}, Niños: ${value.numberPassenger.numberChildren} `}</td>
                                         <td>{value.price}</td>
                                         <td>
                                             <button onClick={e => deleteTripBook(index)}>Eliminar</button>
@@ -80,7 +95,7 @@ const ShoppingCart = (props) => {
 
                 {
                     tickets.length > 0 ?
-                        <button className='registerData' onClick={e => setpayment(true)}>
+                        <button className='registerData' onClick={e => setIsOpen(true)}>
                             Registrar datos
                         </button> :
                         null
@@ -90,7 +105,17 @@ const ShoppingCart = (props) => {
 
             </div >
 
-            {payment === true && tickets.length > 0 ? <RegisterForm /> : null}
+            {tickets.length > 0 ?
+
+                (<Modal
+                    isOpen={modalIsOpen}
+                    style={customStyles}
+                    onRequestClose={e => setIsOpen(false)}
+
+                >
+                    <RegisterForm />
+                </Modal>
+                ) : null}
 
         </>
     )

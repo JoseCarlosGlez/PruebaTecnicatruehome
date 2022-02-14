@@ -1,11 +1,9 @@
 /* eslint-disable no-unreachable */
-import React from 'react'
+import React, { forwardRef, useImperativeHandle } from 'react'
 import { useState } from 'react'
 import './selectNumberPeople.scss'
 import classnames from 'classnames'
-let numberAdultTemp = 0
-let numberChildrenTemp = 0
-const SelectNumberPeople = ({ GetNumberPassenger }, ref) => {
+const SelectNumberPeople = forwardRef(({ GetNumberPassenger }, ref) => {
 
 
     const [isActive, setIsActive] = useState(false)
@@ -13,6 +11,15 @@ const SelectNumberPeople = ({ GetNumberPassenger }, ref) => {
     const [numberChildren, setNumberChildren] = useState(0)
 
 
+    useImperativeHandle(
+        ref,
+        () => ({
+            resetValues() {
+                setNumberAdult(0)
+                setNumberChildren(0)
+            }
+        }),
+    )
 
 
     return (
@@ -45,9 +52,9 @@ const SelectNumberPeople = ({ GetNumberPassenger }, ref) => {
                         </p>
                         <span onClick={e => {
                             if (numberAdult > 0) {
-                                numberAdultTemp--
-                                setNumberAdult(numberAdultTemp)
-                                GetNumberPassenger({ numberAdultTemp, numberChildrenTemp })
+                                let value = numberAdult - 1
+                                setNumberAdult(value)
+                                GetNumberPassenger({ numberAdult: value, numberChildren })
 
                             }
 
@@ -61,9 +68,9 @@ const SelectNumberPeople = ({ GetNumberPassenger }, ref) => {
                         </span>
 
                         <span onClick={e => {
-                            numberAdultTemp++
-                            setNumberAdult(numberAdultTemp)
-                            GetNumberPassenger({ numberAdultTemp, numberChildrenTemp })
+                            let value = numberAdult + 1
+                            setNumberAdult(value)
+                            GetNumberPassenger({ numberAdult: value, numberChildren })
 
                         }}>
                             +
@@ -77,9 +84,9 @@ const SelectNumberPeople = ({ GetNumberPassenger }, ref) => {
                         </p>
                         <span onClick={e => {
                             if (numberAdult > 0) {
-                                numberChildrenTemp--
-                                setNumberChildren(numberChildrenTemp)
-                                GetNumberPassenger({ numberAdultTemp, numberChildrenTemp })
+                                let value = numberChildren - 1
+                                setNumberChildren(value)
+                                GetNumberPassenger({ numberAdult, numberChildren: value })
                             }
                         }}>
                             -
@@ -88,9 +95,9 @@ const SelectNumberPeople = ({ GetNumberPassenger }, ref) => {
                             {numberChildren}
                         </span>
                         <span onClick={e => {
-                            numberChildrenTemp++
-                            setNumberChildren(numberChildrenTemp)
-                            GetNumberPassenger({ numberAdultTemp, numberChildrenTemp })
+                            let value = numberChildren + 1
+                            setNumberChildren(value)
+                            GetNumberPassenger({ numberAdult, numberChildren: value })
 
                         }}>
                             +
@@ -102,6 +109,6 @@ const SelectNumberPeople = ({ GetNumberPassenger }, ref) => {
         </>
 
     )
-}
+})
 
 export default SelectNumberPeople;
